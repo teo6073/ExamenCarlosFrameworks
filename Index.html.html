@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Papeleria Escolar</title>
+</head>
+<body>
+
+    <h1>Papeleria Escolar</h1>
+    <h3>Calculadora de copias</h3>
+
+    <label>Copias a color:</label>
+    <input type="text" id="color" value="0">
+    <br><br>
+
+    <label>Copias blanco y negro:</label>
+    <input type="text" id="bn" value="0">
+    <br><br>
+
+    <label>¿Presenta credencial?</label>
+    <input type="checkbox" id="credencial">
+    <br><br>
+
+    <button onclick="calcular()">Calcular</button>
+    <button onclick="limpiar()">Limpiar</button>
+
+    <p id="resultado">Total a pagar: $0</p>
+
+    <script>
+
+        function calcular() {
+
+            let color = Number(document.getElementById("color").value);
+            let bn = Number(document.getElementById("bn").value);
+
+            let precioColor;
+            let precioBN;
+
+            let cantidad = Math.max(color, bn);
+
+            if (cantidad <= 50) {
+                precioColor = 1.50;
+                precioBN = 1;
+            }
+            else if (cantidad <= 100) {
+                precioColor = 1.30;
+                precioBN = 0.80;
+            }
+            else {
+                precioColor = 1;
+                precioBN = 0.50;
+            }
+
+            let total = (color * precioColor) + (bn * precioBN);
+
+            if (document.getElementById("credencial").checked == true) {
+                total = total - (total * 0.25);
+            }
+
+            document.getElementById("resultado").innerHTML =
+                "Total a pagar: $" + total.toFixed(2);
+
+        }
+
+        function limpiar() {
+
+            document.getElementById("color").value = 0;
+            document.getElementById("bn").value = 0;
+            document.getElementById("credencial").checked = false;
+
+            document.getElementById("resultado").innerHTML =
+                "Total a pagar: $0.00";
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+ 
